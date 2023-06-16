@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() {
+/*void main() {
   runApp(
     const MaterialApp(
       home: Scaffold(
@@ -13,6 +13,13 @@ void main() {
       ),
     ),
   );
+}*/
+
+void main() {
+  runApp(const MaterialApp(
+      home: WidgetA(
+    child: WidgetB(),
+  )));
 }
 
 class CounterApp extends StatefulWidget {
@@ -45,5 +52,37 @@ class _CounterAppState extends State<CounterApp> {
         ),
       ],
     );
+  }
+}
+
+class WidgetA extends StatefulWidget {
+  final Widget child;
+  const WidgetA({super.key, required this.child});
+
+  @override
+  State<WidgetA> createState() => _WidgetAState();
+}
+
+class _WidgetAState extends State<WidgetA> {
+  @override
+  Widget build(BuildContext context) {
+    debugPrint('WidgetA rebuild');
+    return Column(
+      children: [
+        ElevatedButton(
+            onPressed: () => setState(() {}), child: const Text('Press me')),
+        widget.child
+      ],
+    );
+  }
+}
+
+class WidgetB extends StatelessWidget {
+  const WidgetB({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    debugPrint('WidgetB rebuild');
+    return Container();
   }
 }
